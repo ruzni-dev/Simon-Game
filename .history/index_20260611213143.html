@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simon-Game</title>
+  <!-- Futuristic Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="theme-cyberpunk">
+  <!-- Sci-fi grid background -->
+  <div class="grid-overlay"></div>
+  <div class="glow-orb" id="orb-1"></div>
+  <div class="glow-orb" id="orb-2"></div>
+
+  <div class="cyber-container">
+    <!-- Header -->
+    <header class="cyber-header">
+      <div class="logo-area">
+        <div class="cyber-badge">SYSTEM SECURE</div>
+        <h1>SIMON<span>// QUANTUM CORE</span></h1>
+      </div>
+      <!-- Audio Visualizer in Header -->
+      <div class="visualizer-container">
+        <canvas id="visualizer-canvas"></canvas>
+      </div>
+    </header>
+
+    <div class="dashboard-grid">
+      <!-- Left Sidebar: Modes & Leaderboard -->
+      <aside class="side-panel left-panel">
+        <div class="panel-card" id="modes-card">
+          <h2><span class="card-icon">⚡</span> PROTOCOL MODES</h2>
+          <div class="mode-options">
+            <button class="mode-btn active" data-mode="classic">
+              <span class="mode-title">CLASSIC</span>
+              <span class="mode-desc">Standard memory synthesis</span>
+            </button>
+            <button class="mode-btn" data-mode="speedrun">
+              <span class="mode-title">SPEEDRUN</span>
+              <span class="mode-desc">Tempo accelerates each cycle</span>
+            </button>
+            <button class="mode-btn" data-mode="strict">
+              <span class="mode-title">STRICT</span>
+              <span class="mode-desc">Single failure triggers full wipe</span>
+            </button>
+            <button class="mode-btn" data-mode="reverse">
+              <span class="mode-title">REVERSE</span>
+              <span class="mode-desc">Replicate sequence backwards</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-card" id="leaderboard-card">
+          <h2><span class="card-icon">📊</span> DATA SHARDS (HIGH SCORES)</h2>
+          <div class="scores-list">
+            <div class="score-row">
+              <span class="score-label">Classic Mode:</span>
+              <span class="score-val" id="high-classic">0</span>
+            </div>
+            <div class="score-row">
+              <span class="score-label">Speedrun Mode:</span>
+              <span class="score-val" id="high-speedrun">0</span>
+            </div>
+            <div class="score-row">
+              <span class="score-label">Strict Mode:</span>
+              <span class="score-val" id="high-strict">0</span>
+            </div>
+            <div class="score-row">
+              <span class="score-label">Reverse Mode:</span>
+              <span class="score-val" id="high-reverse">0</span>
+            </div>
+          </div>
+          <button id="reset-data" class="action-btn-secondary">WIPE CORE DATA</button>
+        </div>
+      </aside>
+
+      <!-- Center Console: The Game Board -->
+      <main class="console-panel">
+        <div class="canvas-particle-wrapper">
+          <canvas id="particle-canvas"></canvas>
+          
+          <div class="simon-ring">
+            <!-- Game pads -->
+            <div type="button" id="green" class="pad green-pad" data-key="green">
+              <span class="key-hint">Q</span>
+            </div>
+            <div type="button" id="red" class="pad red-pad" data-key="red">
+              <span class="key-hint">W</span>
+            </div>
+            <div type="button" id="yellow" class="pad yellow-pad" data-key="yellow">
+              <span class="key-hint">A</span>
+            </div>
+            <div type="button" id="blue" class="pad blue-pad" data-key="blue">
+              <span class="key-hint">S</span>
+            </div>
+
+            <!-- Central Core Screen -->
+            <div class="core-display">
+              <div class="core-inner">
+                <div class="core-status">STATUS</div>
+                <div id="core-state" class="state-indicator font-digital">STANDBY</div>
+                <div class="level-indicator">
+                  <span class="lbl">CYCLE</span>
+                  <span id="level-title" class="font-digital">00</span>
+                </div>
+                <button id="start-btn" class="core-action-btn">ENGAGE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Right Sidebar: Audio Settings & Controls -->
+      <aside class="side-panel right-panel">
+        <div class="panel-card" id="audio-settings-card">
+          <h2><span class="card-icon">🔊</span> ACOUSTIC MATRIX</h2>
+          <div class="control-group">
+            <label for="volume-slider">AMPLITUDE</label>
+            <div class="slider-wrapper">
+              <input type="range" id="volume-slider" min="0" max="100" value="50">
+              <span id="volume-val">50%</span>
+            </div>
+          </div>
+          <div class="control-group">
+            <label>SYNTHESIZER CORE</label>
+            <div class="synth-options">
+              <button class="synth-btn active" data-synth="classic">Classic</button>
+              <button class="synth-btn" data-synth="sine">Sine</button>
+              <button class="synth-btn" data-synth="triangle">Triangle</button>
+              <button class="synth-btn" data-synth="sawtooth">Sawtooth</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-card" id="theme-settings-card">
+          <h2><span class="card-icon">🎨</span> CHROMATIC MATRIX</h2>
+          <div class="theme-grid">
+            <button class="theme-select-btn cyber-theme active" data-theme="cyberpunk" title="Cyberpunk Cyan">
+              <span class="theme-dot" style="background: #00f3ff;"></span> Cyber
+            </button>
+            <button class="theme-select-btn solar-theme" data-theme="solar" title="Solar Gold">
+              <span class="theme-dot" style="background: #ffaa00;"></span> Solar
+            </button>
+            <button class="theme-select-btn space-theme" data-theme="space" title="Deep Space">
+              <span class="theme-dot" style="background: #a100ff;"></span> Space
+            </button>
+            <button class="theme-select-btn ruby-theme" data-theme="ruby" title="Laser Ruby">
+              <span class="theme-dot" style="background: #ff0055;"></span> Ruby
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-card" id="controls-card">
+          <h2><span class="card-icon">🎮</span> INPUT LINK</h2>
+          <div class="keyboard-mappings">
+            <div class="map-row"><span class="key-cap">Q</span> <span>➔ Green Pad</span></div>
+            <div class="map-row"><span class="key-cap">W</span> <span>➔ Red Pad</span></div>
+            <div class="map-row"><span class="key-cap">A</span> <span>➔ Yellow Pad</span></div>
+            <div class="map-row"><span class="key-cap">S</span> <span>➔ Blue Pad</span></div>
+            <div class="map-row"><span class="key-cap">Space</span> <span>➔ Start / Reset</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <footer class="cyber-footer">
+    <p>SECURE TERMINAL // SIMON QUANTUM v2.5.0 // COGNITIVE REPLICATION PROTOCOL</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/script.js" charset="utf-8"></script>
+</body>
+</html>
+
