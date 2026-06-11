@@ -836,7 +836,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 /* Footer details */
 .cyber-footer {
   text-align: center;
-  padding: 20px 0;
+  padding-top: 20px;
   border-top: 1px dashed var(--border-color);
   margin-top: 30px;
   transition: border-color var(--transition-speed);
@@ -965,14 +965,17 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   width: 90%;
   max-width: 1400px;
   margin: 80px auto 40px;
-  padding: 20px;
-  border-radius: 12px;
-  background: var(--bg-secondary);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-color);
-  transition: border-color var(--transition-speed), box-shadow var(--transition-speed), background var(--transition-speed);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 0 10px var(--panel-glow);
+  padding: 40px;
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 10px 50px rgba(0,0,0,0.35),
+    inset 0 0 20px rgba(255,255,255,0.03);
 }
 
 .panel-header {
@@ -1004,22 +1007,19 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 .instruction-card {
   position: relative;
   overflow: hidden;
-  color: var(--text-secondary);
-  padding: 10px 14px;
-  border-radius: 8px;
 
-  background: rgba(255, 255, 255, 0.02);
+  padding: 28px;
+  border-radius: 22px;
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.04);
 
-  transition: all 0.2s ease;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  transition: all 0.35s ease;
 }
 
 .instruction-card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
-  transform: translateY(-5px);
+  transform: translateY(-8px);
   box-shadow:
     0 15px 35px rgba(0,0,0,0.3),
     0 0 25px rgba(0,255,255,0.15);
@@ -1063,7 +1063,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255,255,255,0.05),
+    rgba(255,255,255,0.08),
     transparent
   );
 

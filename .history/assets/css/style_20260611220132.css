@@ -836,7 +836,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 /* Footer details */
 .cyber-footer {
   text-align: center;
-  padding: 20px 0;
+  padding-top: 20px;
   border-top: 1px dashed var(--border-color);
   margin-top: 30px;
   transition: border-color var(--transition-speed);
@@ -1015,14 +1015,30 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   transition: all 0.2s ease;
 }
 
+.mode-btn {
+  
+  
+  
+  
+  text-align: left;
+  cursor: pointer;
+  
+  
+  display: flex;
+  flex-direction: column;
+}
+
 .instruction-card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
-  transform: translateY(-5px);
+  transform: translateY(-8px);
   box-shadow:
     0 15px 35px rgba(0,0,0,0.3),
     0 0 25px rgba(0,255,255,0.15);
+}
+
+.mode-btn:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
 }
 
 .step-number {
@@ -1063,7 +1079,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255,255,255,0.05),
+    rgba(255,255,255,0.08),
     transparent
   );
 
